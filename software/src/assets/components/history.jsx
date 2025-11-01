@@ -5,7 +5,7 @@ function HistoryTable() {
   const [historico, setHistorico] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/dados/historico")
+    fetch("https://projeto-integrador-nk5o.onrender.com/dados/historico")
       .then((res) => res.json())
       .then((data) => setHistorico(data))
       .catch((err) => console.error("Erro ao buscar histórico:", err));
