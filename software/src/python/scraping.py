@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-@app.route('/get_first_image', methods=['POST'])
+@app.route('https://python-server-gktf.onrender.com/get_first_image', methods=['POST'])
 def get_first_image():
    
     data = request.get_json()
@@ -44,7 +44,7 @@ def get_first_image():
     except requests.exceptions.RequestException as e:
         return jsonify({'error': f'Erro ao acessar o site: {e}'}), 500
     
-@app.route('/get_icon', methods=['POST'])
+@app.route('https://python-server-gktf.onrender.com/get_icon', methods=['POST'])
 def get_icon():
     data = request.get_json()
     link_site = data.get('link')
@@ -69,7 +69,7 @@ def get_icon():
     except requests.exceptions.RequestException as e:
         return jsonify({'error': f'Erro ao acessar o site: {e}'}), 500
 
-@app.route('/get_credits', methods=['POST'])
+@app.route('https://python-server-gktf.onrender.com/get_credits', methods=['POST'])
 def get_credits():
     data = request.get_json()
     link_site = data.get('link')
