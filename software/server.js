@@ -6,10 +6,31 @@ import cron from "node-cron";
 import { spawn } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+// Garantir compatibilidade se 'process' não existir (ex: rodando em ambiente browser)
+if (typeof globalThis.process === "undefined") {
+  globalThis.process = { env: {} };
+}
 
 const app = express();
-app.use(cors());
-const PORT = 4000;
+
+// Define as variáveis com fallback seguro
+const PORT = globalThis.process?.env?.PORT || 4000;
+const FRONTEND_URL =
+  globalThis.process?.env?.FRONTEND_URL ||
+  "https://projeto-integrador-qzrn.vercel.app";
+
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // caminho do arquivo atual
@@ -19,18 +40,22 @@ const __dirname = path.dirname(__filename);
 // variáveis globais
 let dadosESP = {}; // último dado recebido
 let cloudCover = null; // cobertura de nuvens atual
-let ultimaPrevisao = null;  // guarda última previsão
+let ultimaPrevisao = null; // guarda última previsão
 
 // funçao para gerar a previsão
 async function gerarPrevisao() {
   return new Promise((resolve, reject) => {
     try {
-      const lastESP = db.prepare(`
+      const lastESP = db
+        .prepare(
+          `
         SELECT temperatura, umidade, pressaoAtm, created_at 
         FROM leituras
         ORDER BY datetime(created_at) DESC
         LIMIT 1
-      `).get();
+      `
+        )
+        .get();
 
       if (!lastESP) return reject("Sem dados do ESP");
 
@@ -39,7 +64,8 @@ async function gerarPrevisao() {
         pressao_mbar,
         lastESP.temperatura,
         lastESP.umidade,
-        0, 0,
+        0,
+        0,
         cloudCover,
       ];
 
@@ -50,7 +76,9 @@ async function gerarPrevisao() {
 
       let resultData = "";
       py.stdout.on("data", (data) => (resultData += data.toString()));
-      py.stderr.on("data", (data) => console.error("Python stderr:", data.toString()));
+      py.stderr.on("data", (data) =>
+        console.error("Python stderr:", data.toString())
+      );
 
       py.on("close", (code) => {
         console.log(`Processo Python finalizado com código: ${code}`);
@@ -67,7 +95,6 @@ async function gerarPrevisao() {
 
       py.stdin.write(JSON.stringify({ features }));
       py.stdin.end();
-
     } catch (error) {
       console.error("Erro ao gerar previsão:", error);
       reject(error);
@@ -108,11 +135,15 @@ app.post("/dados/refresh", async (req, res) => {
 
 app.get("/dados/ultimo", (req, res) => {
   try {
-    const ultimoDado = db.prepare(`
+    const ultimoDado = db
+      .prepare(
+        `
       SELECT * FROM leituras
       ORDER BY datetime(created_at) DESC
       LIMIT 1
-    `).get();
+    `
+      )
+      .get();
 
     res.json(ultimoDado);
   } catch (error) {
@@ -186,7 +217,7 @@ app.get("/dados/historico", (req, res) => {
 
 // rota para atualizar cloudCover
 app.post("/cloudcover", (req, res) => {
-   const { cloudCover: novoValor } = req.body;
+  const { cloudCover: novoValor } = req.body;
 
   if (novoValor == null) {
     return res.status(400).json({ error: "cloudCover não enviado" });
