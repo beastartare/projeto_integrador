@@ -19,7 +19,7 @@ function Info() {
 
   const fetchPrediction = useCallback(async () => {
     try {
-      const res = await fetch(`${API_URL}/predict`);
+      const res = await fetch(`https://python-server-gktf.onrender.com/predict`);
       if (!res.ok) throw new Error("Erro ao buscar predição");
       const data = await res.json();
 
