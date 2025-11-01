@@ -1,0 +1,12 @@
+# Dependências para scraping.py
+Flask
+flask-cors
+requests
+beautifulsoup4
+gunicorn  # Servidor WSGI para deploy no Render
+
+# Dependências para server.py
+xgboost
+# numpy (XGBoost geralmente exige numpy para processamento de features)
+# Coloque aqui a versão específica de numpy se souber
+numpy
