@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 
-const API_URL = "https://projeto-integrador-nk5o.onrender.com";
+const API_URL = process.env.BACKEND_PY
 
 function Info() {
   const navigate = useNavigate();
