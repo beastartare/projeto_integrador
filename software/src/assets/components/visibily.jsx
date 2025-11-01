@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCloudCover } from "../../services/cloudService";
 
-const API_URL = "http://localhost:4000";
+const API_URL = "https://projeto-integrador-nk5o.onrender.com";
 
 function Visibility() {
   const [cloud, setCloud] = useState({ value: 0, time: null });
