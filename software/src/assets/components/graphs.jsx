@@ -53,7 +53,7 @@ function Graphs() {
 
   // busca dados do backend
   useEffect(() => {
-    fetch("http://localhost:4000/dados/historico")
+    fetch("https://projeto-integrador-nk5o.onrender.com/dados/historico")
       .then((res) => res.json())
       .then((data) => {
         const formattedData = data
