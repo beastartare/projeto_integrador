@@ -6,7 +6,7 @@ from urllib.parse import urljoin # Importação movida para o topo
 
 app = Flask(__name__)
 # Permite que qualquer front-end (como o seu no Vercel) acesse esta API
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "https://projeto-integrador-qzrn.vercel.app/"}})
 
 
 @app.route('/get_first_image', methods=['POST'])
