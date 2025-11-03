@@ -105,7 +105,7 @@ def get_credits():
         return jsonify({'error': f'Erro ao acessar o site: {e}'}), 500
 
 
-
 if __name__ == '__main__':
-    # Esta linha é para desenvolvimento local. No Render, o Gunicorn a ignora.
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
