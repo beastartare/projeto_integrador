@@ -35,7 +35,7 @@ function EventPage() {
       const fetchImage = async () => {
         try {
           const response = await fetch(
-            "http://127.0.0.1:5000/get_first_image",
+            "https://python-server-gktf.onrender.com/get_first_image",
             {
               method: "POST",
               headers: {
@@ -69,7 +69,7 @@ function EventPage() {
     if (link) {
       const fetchIcon = async () => {
         try {
-          const response = await fetch("http://127.0.0.1:5000/get_icon", {
+          const response = await fetch("https://python-server-gktf.onrender.com/get_icon", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function EventPage() {
       setErrorCredit(null);
       const fetchCredit = async () => {
         try {
-          const response = await fetch("http://127.0.0.1:5000/get_credits", {
+          const response = await fetch("https://python-server-gktf.onrender.com/get_credits", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
