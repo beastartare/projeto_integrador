@@ -44,7 +44,7 @@ function App() {
       try {
         console.log("Fetching events...");
         const response = await fetch(
-          "https://projeto-integrador-nk5o.onrender.com"
+          "https://projeto-integrador-nk5o.onrender.com/events"
         );
 
         if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
