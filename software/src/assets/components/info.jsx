@@ -50,7 +50,7 @@ import { useState, useEffect, useCallback } from "react";
  * Endereço base da API backend.
  * @constant {string}
  */
-const API_URL = "http://localhost:4000";
+const API_URL = "https://projeto-integrador-nk5o.onrender.com";
 
 /**
  * @component Info

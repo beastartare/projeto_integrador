@@ -1,34 +1,33 @@
 import { useEffect, useState } from "react";
 import { getCloudCover } from "../../services/cloudService";
 
-const API_URL = "http://localhost:4000";
+const API_URL = "https://projeto-integrador-nk5o.onrender.com";
 
 function Visibility() {
   const [cloud, setCloud] = useState({ value: 0, time: null });
 
-    async function fetchCloud() {
+  async function fetchCloud() {
     try {
-    const data = await getCloudCover();
-    setCloud(data);
+      const data = await getCloudCover();
+      setCloud(data);
 
-    console.log("Enviando cloudCover:", data.value);
+      console.log("Enviando cloudCover:", data.value);
 
-    const response = await fetch(`${API_URL}/cloudcover`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cloudCover: data.value }),
-    });
+      const response = await fetch(`${API_URL}/cloudcover`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cloudCover: data.value }),
+      });
 
-    if (!response.ok) throw new Error("Falha ao enviar cloudCover");
-
-  } catch (err) {
-    console.error("Erro ao buscar cloud cover ou enviar para predição:", err);
+      if (!response.ok) throw new Error("Falha ao enviar cloudCover");
+    } catch (err) {
+      console.error("Erro ao buscar cloud cover ou enviar para predição:", err);
+    }
   }
-}
 
   useEffect(() => {
     fetchCloud();
-     const now = new Date();
+    const now = new Date();
     const msAteProximaHora =
       (60 - now.getMinutes()) * 60 * 1000 -
       now.getSeconds() * 1000 -
