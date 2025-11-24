@@ -35,7 +35,7 @@ function EventPage() {
       const fetchImage = async () => {
         try {
           const response = await fetch(
-            "http://127.0.0.1:5000/get_first_image",
+            "https://python-server-gktf.onrender.com/get_first_image",
             {
               method: "POST",
               headers: {
@@ -69,13 +69,16 @@ function EventPage() {
     if (link) {
       const fetchIcon = async () => {
         try {
-          const response = await fetch("http://127.0.0.1:5000/get_icon", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ link: link }),
-          });
+          const response = await fetch(
+            "https://python-server-gktf.onrender.com/get_icon",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ link: link }),
+            }
+          );
 
           if (!response.ok) {
             throw new Error(`Erro na API: ${response.status}`);
@@ -97,13 +100,16 @@ function EventPage() {
       setErrorCredit(null);
       const fetchCredit = async () => {
         try {
-          const response = await fetch("http://127.0.0.1:5000/get_credits", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ link: link }),
-          });
+          const response = await fetch(
+            "https://python-server-gktf.onrender.com/get_credits",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ link: link }),
+            }
+          );
 
           if (!response.ok) {
             throw new Error(`Erro na API: ${response.status}`);
