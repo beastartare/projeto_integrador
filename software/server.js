@@ -693,10 +693,13 @@ app.get("/dados/ultimo", (req, res) => {
  * }
  */
 app.get("/dados/historico", (req, res) => {
+  const limit = parseInt(req.query.limit) || 50;
+  const offset = parseInt(req.query.offset) || 0;
+
   try {
     const rows = db
-      .prepare("SELECT * FROM dados_estacao_metereologica ORDER BY id DESC LIMIT 50")
-      .all();
+      .prepare("SELECT * FROM dados_estacao_metereologica ORDER BY id DESC LIMIT ? OFFSET ?")
+      .all(limit, offset);
     res.json(rows);
   } catch (error) {
     console.error("Erro ao buscar histórico:", error.message);

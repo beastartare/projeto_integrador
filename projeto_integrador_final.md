@@ -11,7 +11,7 @@
 
 ### Página principal:
 1) Verificar responsividade da página em si
-2) Arrumar o widget que aparece as infos do hardware para tirar as infos do vento
+~~2) Arrumar o widget que aparece as infos do hardware para tirar as infos do vento~~
 3) Arrumar a responsividade da barra de cobertura de nuvens (aquele 100% para fora)
 4) Adicionar a data dos eventos
 ~~5) Mudar onde a previsao de chuva aparece~~
@@ -31,8 +31,8 @@
 4) Talvez adicionar um botão para mostrar mais linhas da tabela
 
 ### Página "Graphs": 
-1) Verificar responsividade da página em si
-2) Verificar responsividade dos gráficos
+~~1) Verificar responsividade da página em si~~
+~~2) Verificar responsividade dos gráficos~~
 3) Adicionar mais gráficos? (precipitação/cloudcover/prob. de chuva)
 
 ### Banco de dados:

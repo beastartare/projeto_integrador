@@ -80,6 +80,7 @@ function Info() {
     pressaoAtm: null,
     uvClassificacao: "-",
     prediction: null,
+    precipitacao: null,
   });
 
   /**
@@ -112,6 +113,7 @@ function Info() {
         pressaoAtm: data.pressaoAtm,
         uvClassificacao: data.uvClassificacao,
         prediction: data.rainProbability,
+        precipitacao: data.precipitacao,
       });
 
       setLastUpdated(new Date(data.created_at));
@@ -196,8 +198,12 @@ function Info() {
       <div className="flex justify-between items-start">
         <div className="flex text-sm md:text-xl sm:text-sm font-bold text-slate-200 gap-4">
           <div>
-            <p>Temperature: {sensorData.temperatura} °C</p>
-            <p>Humidity: {sensorData.umidade} %</p>
+            <p>Temperature: {sensorData.temperatura !== null
+                ? sensorData.temperatura
+                : "-"}{" "} °C</p>
+            <p>Humidity: {sensorData.umidade !== null
+                ? sensorData.umidade
+                : "-"}{" "} %</p>
           </div>
           <div>
             <p>UV Index: {sensorData.uvClassificacao}</p>
@@ -223,6 +229,11 @@ function Info() {
                 ? Number(sensorData.pressaoAtm).toFixed(2)
                 : "-"}{" "}
               Pa
+            </p>
+            <p>
+              Precipitation: {sensorData.precipitacao !== null
+                ? sensorData.precipitacao
+                : "-"}{" "} mm
             </p>
           </div>
         </div>
